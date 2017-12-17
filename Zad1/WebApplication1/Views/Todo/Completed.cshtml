@@ -1,24 +1,24 @@
 ﻿
 
-@model IEnumerable<WebApplication1.ViewModels.TodoViewModel>
+@model WebApplication1.ViewModels.CompletedViewModel
 @{
     ViewData["Title"] = "Todo Items";
 }
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
     <body>
         <h1>Tasks:</h1>
-        @foreach (var task in Model)
-        {
-            <br><strong>@task.Text</strong>
-            <br>@task.DateCompleted 
-
-            
-        }<br/>
-    <br/><a asp-action="Index" title="Back to main page">Back</a>
+        
+        
+        @{
+            Html.RenderPartial("PartialView");
+        }
+   
+        <br/><a asp-action="Index" title="Back to main page">Back</a>
     </body>
 </html>
 

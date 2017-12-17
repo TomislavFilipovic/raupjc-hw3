@@ -37,7 +37,11 @@ namespace WebApplication1.Controllers
                    DateCompleted=item.DateCompleted
             })
                 .ToList();
-            return View( vms);
+            IndexViewModel vm = new IndexViewModel
+            {
+                TodoModels = vms
+            };
+            return View( vm);
         }
         public async Task<IActionResult> Completed()
         {
@@ -54,7 +58,8 @@ namespace WebApplication1.Controllers
                     DateCompleted = item.DateCompleted
                 })
                 .ToList();
-            return View(vms);
+            CompletedViewModel vm = new CompletedViewModel() { TodoModels =vms};
+            return View(vm);
         }
         private String createRemainingText(DateTime dateDue)
         {
@@ -80,7 +85,12 @@ namespace WebApplication1.Controllers
             _repository.MarkAsCompleted(vm, user.GuidId);
             return Redirect("Index");
         }
-
+        public async Task<IActionResult> Remove(Guid vm)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            _repository.Remove(vm, user.GuidId);
+            return Redirect("Completed");
+        }
         public  ViewResult Add()
         {
 
